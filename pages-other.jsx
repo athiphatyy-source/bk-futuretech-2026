@@ -556,13 +556,6 @@ function SubmitPage({ setScreen }) {
                 </div>
               </div>
 
-              <div className="check-row">
-                <input type="checkbox" id="consent" defaultChecked />
-                <label htmlFor="consent">
-                  ข้าพเจ้าให้ความยินยอมเปิดเผยข้อมูลผลงานนี้ตาม <a>พรบ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)</a>
-                  เพื่อใช้ในการพิจารณาและเผยแพร่บนแพลตฟอร์ม BK FutureTech 2026
-                </label>
-              </div>
             </>)}
 
             {step === 6 && (<>
@@ -609,6 +602,13 @@ function SubmitPage({ setScreen }) {
                   </div>
                 </div>
               ))}
+              {/* G6: PDPA consent at step 6 (Preview & Confirm) per TOR 4.1.3 */}
+              <div className="check-row" style={{marginTop: 16, padding:'16px', background:'var(--inno-green-soft)', borderRadius: 10, border:'1px solid var(--inno-green)'}}>
+                <input type="checkbox" id="consent" defaultChecked />
+                <label htmlFor="consent" style={{fontSize: 13.5}}>
+                  ข้าพเจ้าให้ความยินยอมเปิดเผยข้อมูลผลงานนี้ตาม <a style={{color:'var(--ku-green)', fontWeight:600}}>พรบ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)</a> เพื่อใช้ในการพิจารณาและเผยแพร่บนแพลตฟอร์ม BK FutureTech 2026
+                </label>
+              </div>
             </>)}
 
             <div className="action-row">
@@ -808,6 +808,12 @@ function KnowledgePage({ setScreen }) {
                   {answers[0] !== undefined ? (answers[0] * 2 + 1) : '—'}
                 </div>
                 <div style={{fontSize: 12, color:'var(--ink-3)'}}>* คำนวณจากคำตอบที่ผ่านมา</div>
+                {/* G3: PDF export button */}
+                {answers[0] !== undefined && (
+                  <button className="btn btn-outline btn-sm no-print" style={{marginTop: 12, width:'100%'}} onClick={() => window.print()}>
+                    <Icon.Doc size={13}/> พิมพ์ / บันทึก PDF
+                  </button>
+                )}
               </div>
             </aside>
           </div>

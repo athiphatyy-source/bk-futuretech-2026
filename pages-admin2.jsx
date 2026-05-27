@@ -97,6 +97,54 @@ function AdminLayout({ active, setActive, setScreen, signOut, label, children })
   );
 }
 
+// G4: Bulk upload modal component (reused in AdminSubmissions toolbar)
+function BulkUploadBtn() {
+  const [open, setOpen] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  return (
+    <>
+      <button className="btn btn-outline btn-sm" onClick={() => setOpen(true)}>
+        <Icon.Upload size={14}/> นำเข้า Excel/CSV
+      </button>
+      {open && (
+        <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.4)', zIndex:300, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setOpen(false)}>
+          <div style={{background:'#fff', borderRadius:16, padding:32, width:480, boxShadow:'0 24px 60px rgba(0,0,0,0.2)'}} onClick={e => e.stopPropagation()}>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20}}>
+              <h3 style={{margin:0, fontSize:17}}>นำเข้าผลงานจากไฟล์</h3>
+              <button style={{background:'none', border:'none', fontSize:18, cursor:'pointer', color:'var(--ink-3)'}} onClick={() => setOpen(false)}>✕</button>
+            </div>
+            <div
+              onDragOver={e => { e.preventDefault(); setDragging(true); }}
+              onDragLeave={() => setDragging(false)}
+              onDrop={e => { e.preventDefault(); setDragging(false); }}
+              style={{
+                border: `2px dashed ${dragging ? 'var(--ku-green)' : 'var(--line-2)'}`,
+                borderRadius:12, padding:'36px 24px', textAlign:'center',
+                background: dragging ? 'var(--inno-green-soft)' : '#FAFBFC',
+                transition:'all .2s', marginBottom:16
+              }}
+            >
+              <div style={{fontSize:32, marginBottom:8}}>📂</div>
+              <div style={{fontWeight:600, marginBottom:4}}>ลากไฟล์มาวางที่นี่</div>
+              <div style={{fontSize:13, color:'var(--ink-3)', marginBottom:14}}>รองรับ .xlsx, .xls, .csv (ขนาดไม่เกิน 5 MB)</div>
+              <button className="btn btn-outline btn-sm">เลือกไฟล์</button>
+            </div>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+              <a style={{fontSize:13, color:'var(--ku-green)', cursor:'pointer', textDecoration:'underline'}}>
+                <Icon.Doc size={12}/> ดาวน์โหลด Template (.xlsx)
+              </a>
+              <div style={{display:'flex', gap:8}}>
+                <button className="btn btn-outline btn-sm" onClick={() => setOpen(false)}>ยกเลิก</button>
+                <button className="btn btn-primary btn-sm">นำเข้าข้อมูล</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 // ============ Submissions ============
 function AdminSubmissions() {
   const rows = [
@@ -149,6 +197,8 @@ function AdminSubmissions() {
           <select><option>สถานะทั้งหมด</option><option>New</option><option>In Review</option><option>Approved</option></select>
           <select><option>TRL ทั้งหมด</option></select>
           <button className="btn btn-outline btn-sm"><Icon.Doc size={14}/> Export</button>
+          {/* G4: Bulk upload */}
+          <BulkUploadBtn />
         </div>
         <table className="data">
           <thead>
@@ -754,6 +804,36 @@ function AdminSettings() {
           <div style={{display:'flex', gap:10, marginTop: 14}}>
             <button className="btn btn-outline btn-sm" style={{flex:1}}>สำรองข้อมูลทันที</button>
             <button className="btn btn-outline btn-sm" style={{flex:1}}>กู้คืน</button>
+          </div>
+        </div>
+
+        {/* G5: Banner & Popup CMS (TOR 4.2.4) */}
+        <div className="settings-card" style={{gridColumn:'1 / -1'}}>
+          <h4 style={{marginBottom:16}}>จัดการ Banner &amp; Pop-up (CMS)</h4>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:16}}>
+            {[
+              { title:'Banner หน้าแรก', items:['BK FutureTech 2026 — เปิดรับสมัครแล้ว!', 'ร่วมงาน 24–25 มิ.ย. 2569 ที่ ม.เกษตรศาสตร์'] },
+              { title:'Pop-up ประกาศ', items:['หมดเขตส่งผลงาน 31 พ.ค. 2569', 'ลงทะเบียนล่วงหน้าเต็มแล้ว — แจ้งรายชื่อสำรอง'] },
+              { title:'Slider ข่าว', items:['นวัตกรรม Agri-Tech 2026 ประกาศผลแล้ว', 'เพิ่มวงเงินสนับสนุน Business Matching รอบ 2'] },
+            ].map(({ title, items }, ci) => (
+              <div key={ci} style={{border:'1px solid var(--line)', borderRadius:10, padding:14}}>
+                <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10}}>
+                  <strong style={{fontSize:13}}>{title}</strong>
+                  <button className="btn btn-primary btn-sm" style={{fontSize:11, padding:'3px 10px'}}>
+                    <Icon.Plus size={11}/> เพิ่ม
+                  </button>
+                </div>
+                {items.map((txt, ti) => (
+                  <div key={ti} style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'7px 0', borderBottom: ti < items.length-1 ? '1px solid var(--line)' : 'none', fontSize:12.5}}>
+                    <span style={{color:'var(--ink-2)', flex:1, marginRight:8, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{txt}</span>
+                    <div style={{display:'flex', gap:6, flexShrink:0}}>
+                      <button style={{background:'none', border:'1px solid var(--line)', borderRadius:6, padding:'2px 8px', fontSize:11, cursor:'pointer', color:'var(--ink-3)'}}>แก้ไข</button>
+                      <button style={{background:'none', border:'1px solid #ECC', borderRadius:6, padding:'2px 8px', fontSize:11, cursor:'pointer', color:'#B82828'}}>ลบ</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
 

@@ -100,6 +100,7 @@ const Icon = {
   Bell: (p) => <svg viewBox="0 0 24 24" width={p.size||18} height={p.size||18} fill="none" stroke="currentColor" strokeWidth="1.7" {...p}><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4Z" /><path d="M10 21h4" /></svg>,
   Bookmark: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="none" stroke="currentColor" strokeWidth="1.7" {...p}><path d="M6 4h12v17l-6-4-6 4z" /></svg>,
   ArrowRight: (p) => <svg viewBox="0 0 24 24" width={p.size||14} height={p.size||14} fill="none" stroke="currentColor" strokeWidth="2" {...p}><path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+  Upload: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="none" stroke="currentColor" strokeWidth="1.8" {...p}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeLinecap="round"/><polyline points="17 8 12 3 7 8" strokeLinecap="round" strokeLinejoin="round"/><line x1="12" y1="3" x2="12" y2="15" strokeLinecap="round"/></svg>,
   ChevronRight: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="none" stroke="currentColor" strokeWidth="2" {...p}><path d="m9 5 7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>,
   ChevronLeft: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="none" stroke="currentColor" strokeWidth="2" {...p}><path d="m15 5-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>,
   ChevronDown: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="none" stroke="currentColor" strokeWidth="2" {...p}><path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>,
@@ -112,17 +113,15 @@ const Icon = {
 };
 
 // ---------- Top Nav ----------
-function TopNav({ screen, setScreen, isAuthed, signOut }) {
-  const links = [
-    { id: 'home', label: 'หน้าแรก' },
-    { id: 'about', label: 'เกี่ยวกับงาน' },
-    { id: 'events', label: 'โปรแกรม' },
-    { id: 'catalogue', label: 'นวัตกรรม' },
-    { id: 'submit', label: 'ส่งผลงาน' },
-    { id: 'matching', label: 'จับคู่ธุรกิจ' },
-    { id: 'knowledge', label: 'องค์ความรู้' },
-    { id: 'news', label: 'ข่าวสาร' },
-  ];
+function TopNav({ screen, setScreen, isAuthed, signOut, lang = 'th', setLang }) {
+  const NAV_LABELS = {
+    th: ['หน้าแรก', 'เกี่ยวกับงาน', 'โปรแกรม', 'นวัตกรรม', 'ส่งผลงาน', 'จับคู่ธุรกิจ', 'องค์ความรู้', 'ข่าวสาร'],
+    en: ['Home', 'About', 'Schedule', 'Innovations', 'Submit', 'Matching', 'Knowledge', 'News'],
+  };
+  const ids = ['home', 'about', 'events', 'catalogue', 'submit', 'matching', 'knowledge', 'news'];
+  const labels = NAV_LABELS[lang] || NAV_LABELS.th;
+  const links = ids.map((id, i) => ({ id, label: labels[i] }));
+  const isEn = lang === 'en';
 
   return (
     <header className="topnav">
@@ -140,9 +139,9 @@ function TopNav({ screen, setScreen, isAuthed, signOut }) {
           ))}
         </nav>
         <div className="nav-right">
-          <span className="lang-chip">
+          <span className="lang-chip" onClick={() => setLang && setLang(isEn ? 'th' : 'en')} style={{cursor:'pointer', userSelect:'none'}} title={isEn ? 'Switch to Thai' : 'Switch to English'}>
             <Icon.Globe size={14} />
-            TH
+            {isEn ? 'EN' : 'TH'}
             <Icon.Caret size={10} />
           </span>
           <button className="icon-btn" aria-label="search">
@@ -151,7 +150,7 @@ function TopNav({ screen, setScreen, isAuthed, signOut }) {
           {isAuthed ? (
             <>
               <button className="btn btn-outline btn-sm" onClick={() => setScreen('account')}>
-                <Icon.User size={14} /> บัญชีของฉัน
+                <Icon.User size={14} /> {isEn ? 'My Account' : 'บัญชีของฉัน'}
               </button>
               <button className="btn btn-solid-green btn-sm" onClick={() => setScreen('admin')}>
                 Admin Panel
@@ -159,8 +158,8 @@ function TopNav({ screen, setScreen, isAuthed, signOut }) {
             </>
           ) : (
             <>
-              <button className="btn btn-outline btn-sm" onClick={() => setScreen('login')}>เข้าสู่ระบบ</button>
-              <button className="btn btn-solid-green btn-sm" onClick={() => setScreen('register')}>ลงทะเบียน</button>
+              <button className="btn btn-outline btn-sm" onClick={() => setScreen('login')}>{isEn ? 'Sign In' : 'เข้าสู่ระบบ'}</button>
+              <button className="btn btn-solid-green btn-sm" onClick={() => setScreen('register')}>{isEn ? 'Register' : 'ลงทะเบียน'}</button>
             </>
           )}
         </div>

@@ -5,6 +5,7 @@ function App() {
   const [screen, setScreen] = useState('home');
   const [adminScreen, setAdminScreen] = useState('dash');
   const [isAuthed, setIsAuthed] = useState(false);
+  const [lang, setLang] = useState('th'); // G2: language switcher
 
   // Tweaks
   const t = useTweaks(/*EDITMODE-BEGIN*/{
@@ -95,7 +96,7 @@ function App() {
 
   return (
     <div className="app">
-      {showTopNav && <TopNav screen={screen} setScreen={setScreen} isAuthed={isAuthed} signOut={signOut} />}
+      {showTopNav && <TopNav screen={screen} setScreen={setScreen} isAuthed={isAuthed} signOut={signOut} lang={lang} setLang={setLang} />}
 
       {screen === 'home' && <HomePage setScreen={setScreen} />}
       {screen === 'about' && <AboutPage setScreen={setScreen} />}

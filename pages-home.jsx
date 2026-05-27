@@ -2,6 +2,21 @@
 // Landing page (Home)
 
 function HomePage({ setScreen }) {
+  // G1: Countdown to 24 Jun 2026 08:00 ICT (UTC+7 = 01:00 UTC)
+  const EVENT_DATE = new Date('2026-06-24T01:00:00Z');
+  const [countdown, setCountdown] = useState(() => Math.max(0, EVENT_DATE - new Date()));
+  useEffect(() => {
+    const t = setInterval(() => {
+      const diff = EVENT_DATE - new Date();
+      if (diff <= 0) { setCountdown(0); clearInterval(t); } else { setCountdown(diff); }
+    }, 1000);
+    return () => clearInterval(t);
+  }, []);
+  const cdDays  = Math.floor(countdown / 86400000);
+  const cdHours = Math.floor((countdown % 86400000) / 3600000);
+  const cdMins  = Math.floor((countdown % 3600000) / 60000);
+  const cdSecs  = Math.floor((countdown % 60000) / 1000);
+
   const features = [
     { ic: 'plus', label: 'ส่งผลงานนวัตกรรม', desc: 'ส่งผลงานวิจัย / นวัตกรรม\nเพื่อนำเสนอและเข้าร่วมประกวด', target: 'submit', color: 'green' },
     { ic: 'clip', label: 'ประเมิน TRL / SRL', desc: 'ตรวจสอบระดับความพร้อม\nของเทคโนโลยีและสังคมของคุณ', target: 'knowledge', color: 'blue' },
@@ -48,6 +63,25 @@ function HomePage({ setScreen }) {
                   ดูโปรแกรมงาน
                 </button>
               </div>
+              {/* G1: Countdown timer */}
+              <div className="hero-countdown">
+                {countdown > 0 ? (
+                  <>
+                    <div className="countdown-label">เริ่มงานใน</div>
+                    <div className="countdown-boxes">
+                      {[{ v: cdDays, u: 'วัน' }, { v: cdHours, u: 'ชม.' }, { v: cdMins, u: 'นาที' }, { v: cdSecs, u: 'วินาที' }].map(({ v, u }) => (
+                        <div className="countdown-box" key={u}>
+                          <span className="countdown-num">{String(v).padStart(2, '0')}</span>
+                          <span className="countdown-unit">{u}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="countdown-live">🎉 งานเริ่มแล้ว! 24–25 มิ.ย. 2569</div>
+                )}
+              </div>
+
               <div className="hero-stats">
                 <div className="hero-stat">
                   <div className="hero-stat-row"><Icon.Leaf size={16} style={{color:'#00C26E'}} /> 500+</div>
