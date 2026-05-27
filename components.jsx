@@ -114,6 +114,7 @@ const Icon = {
 
 // ---------- Top Nav ----------
 function TopNav({ screen, setScreen, isAuthed, signOut, lang = 'th', setLang }) {
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const NAV_LABELS = {
     th: ['หน้าแรก', 'เกี่ยวกับงาน', 'โปรแกรม', 'นวัตกรรม', 'ส่งผลงาน', 'จับคู่ธุรกิจ', 'องค์ความรู้', 'ข่าวสาร'],
     en: ['Home', 'About', 'Schedule', 'Innovations', 'Submit', 'Matching', 'Knowledge', 'News'],
@@ -123,47 +124,84 @@ function TopNav({ screen, setScreen, isAuthed, signOut, lang = 'th', setLang }) 
   const links = ids.map((id, i) => ({ id, label: labels[i] }));
   const isEn = lang === 'en';
 
+  const go = (id) => { setScreen(id); setMenuOpen(false); };
+
   return (
     <header className="topnav">
       <div className="topnav-inner">
-        <div className="brand-mark" onClick={() => setScreen('home')}>
+        <div className="brand-mark" onClick={() => go('home')}>
           <LogoMark size={42} withTagline={true} />
         </div>
         <nav className="nav-links">
           {links.map((l, i) => (
-            <a
-              key={i}
-              className={screen === l.id ? 'active' : ''}
-              onClick={() => setScreen(l.id)}
-            >{l.label}</a>
+            <a key={i} className={screen === l.id ? 'active' : ''} onClick={() => go(l.id)}>{l.label}</a>
           ))}
         </nav>
         <div className="nav-right">
-          <span className="lang-chip" onClick={() => setLang && setLang(isEn ? 'th' : 'en')} style={{cursor:'pointer', userSelect:'none'}} title={isEn ? 'Switch to Thai' : 'Switch to English'}>
+          <span className="lang-chip" onClick={() => setLang && setLang(isEn ? 'th' : 'en')} style={{cursor:'pointer', userSelect:'none'}}>
             <Icon.Globe size={14} />
             {isEn ? 'EN' : 'TH'}
             <Icon.Caret size={10} />
           </span>
-          <button className="icon-btn" aria-label="search">
-            <Icon.Search size={16} />
-          </button>
+          <button className="icon-btn" aria-label="search"><Icon.Search size={16} /></button>
           {isAuthed ? (
             <>
-              <button className="btn btn-outline btn-sm" onClick={() => setScreen('account')}>
+              <button className="btn btn-outline btn-sm" onClick={() => go('account')}>
                 <Icon.User size={14} /> {isEn ? 'My Account' : 'บัญชีของฉัน'}
               </button>
-              <button className="btn btn-solid-green btn-sm" onClick={() => setScreen('admin')}>
-                Admin Panel
-              </button>
+              <button className="btn btn-solid-green btn-sm" onClick={() => go('admin')}>Admin Panel</button>
             </>
           ) : (
             <>
-              <button className="btn btn-outline btn-sm" onClick={() => setScreen('login')}>{isEn ? 'Sign In' : 'เข้าสู่ระบบ'}</button>
-              <button className="btn btn-solid-green btn-sm" onClick={() => setScreen('register')}>{isEn ? 'Register' : 'ลงทะเบียน'}</button>
+              <button className="btn btn-outline btn-sm" onClick={() => go('login')}>{isEn ? 'Sign In' : 'เข้าสู่ระบบ'}</button>
+              <button className="btn btn-solid-green btn-sm" onClick={() => go('register')}>{isEn ? 'Register' : 'ลงทะเบียน'}</button>
             </>
           )}
+          <button className="nav-hamburger" onClick={() => setMenuOpen(true)} aria-label="เมนู">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="4" width="16" height="2" rx="1" fill="currentColor"/>
+              <rect x="2" y="9" width="16" height="2" rx="1" fill="currentColor"/>
+              <rect x="2" y="14" width="16" height="2" rx="1" fill="currentColor"/>
+            </svg>
+          </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <div className="mobile-nav-overlay">
+          <div className="mobile-nav-header">
+            <LogoMark size={38} withTagline={true} light={true} />
+            <button className="mobile-nav-close" onClick={() => setMenuOpen(false)}>✕</button>
+          </div>
+          <nav className="mobile-nav-links">
+            {links.map((l, i) => (
+              <a key={i} className={screen === l.id ? 'active' : ''} onClick={() => go(l.id)}>{l.label}</a>
+            ))}
+          </nav>
+          <div className="mobile-nav-btns">
+            <span className="lang-chip" onClick={() => { setLang && setLang(isEn ? 'th' : 'en'); }} style={{cursor:'pointer', justifyContent:'center', background:'rgba(255,255,255,0.08)', borderColor:'rgba(255,255,255,0.15)', color:'#fff'}}>
+              <Icon.Globe size={14} /> {isEn ? 'เปลี่ยนเป็น ภาษาไทย' : 'Switch to English'}
+            </span>
+            {isAuthed ? (
+              <>
+                <button className="btn btn-outline" style={{color:'#fff', borderColor:'rgba(255,255,255,0.25)', background:'transparent'}} onClick={() => go('account')}>
+                  <Icon.User size={14} /> {isEn ? 'My Account' : 'บัญชีของฉัน'}
+                </button>
+                <button className="btn btn-solid-green" onClick={() => go('admin')}>Admin Panel</button>
+              </>
+            ) : (
+              <>
+                <button className="btn btn-outline" style={{color:'#fff', borderColor:'rgba(255,255,255,0.25)', background:'transparent'}} onClick={() => go('login')}>
+                  {isEn ? 'Sign In' : 'เข้าสู่ระบบ'}
+                </button>
+                <button className="btn btn-solid-green" onClick={() => go('register')}>
+                  {isEn ? 'Register' : 'ลงทะเบียน'}
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
