@@ -272,7 +272,7 @@ function HomePage({ setScreen }) {
       {/* ==================== SECONDARY NEWS GRID ==================== */}
       <section className="section-tight" style={{paddingTop: 0}}>
         <div className="container">
-          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 16}}>
+          <div className="home-news-mini" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 16}}>
             {[
               { d: '10 JUN 2026', t: '10 สตาร์ทอัพเกษตรไทยน่าจับตามองในปี 2026', k: 'tech' },
               { d: '08 JUN 2026', t: 'เทคโนโลยีอาหารแห่งอนาคตที่เอเชียกำลังพัฒนา', k: 'food' },

@@ -793,7 +793,7 @@ function AccountPage({ setScreen }) {
                     <h3>ผลงานล่าสุด</h3>
                     <div className="sub">ผลงานที่คุณส่งเข้าระบบ</div>
                   </div>
-                  <table className="data">
+                  <div className="table-scroll"><table className="data">
                     <thead><tr><th>ID</th><th>ชื่อผลงาน</th><th>TRL</th><th>สถานะ</th><th>วันที่ส่ง</th><th></th></tr></thead>
                     <tbody>
                       {myInnovations.map((r,i) => (
@@ -807,11 +807,11 @@ function AccountPage({ setScreen }) {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </table></div>
                   <div className="panel-foot"><a onClick={() => setScreen('submit')}>+ ส่งผลงานใหม่</a></div>
                 </div>
 
-                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16}}>
+                <div className="acc-bottom-grid" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16}}>
                   <div className="panel">
                     <div className="panel-head">
                       <h3>การจอง Business Matching</h3>

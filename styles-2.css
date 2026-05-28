@@ -810,9 +810,11 @@
   .dl-grid { grid-template-columns: 1fr; }
 
   /* Account */
-  .acc-shell { grid-template-columns: 1fr; }
-  .acc-side { position: static; }
+  .acc-shell { grid-template-columns: minmax(0, 1fr); }
+  .acc-side { position: static; min-width: 0; }
+  .acc-side .nav-row { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .acc-stats { grid-template-columns: repeat(2, 1fr); }
+  .acc-bottom-grid { grid-template-columns: 1fr !important; min-width: 0; }
 
   /* Review / Settings */
   .rev-shell { grid-template-columns: 1fr; }

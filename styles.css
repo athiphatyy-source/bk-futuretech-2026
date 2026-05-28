@@ -2167,9 +2167,11 @@ textarea {
   .admin-top { padding: 8px 12px; }
   .admin-kpi-4, .admin-kpi-5 { grid-template-columns: 1fr !important; }
   .trl-picker-grid { grid-template-columns: repeat(3, 1fr); }
+  .admin-grid-4 { grid-template-columns: 1fr !important; }
   .detail h1 { font-size: 19px; }
   .detail-actions .btn { flex: 1 1 100%; }
   .detail-thumbs { grid-template-columns: repeat(2, 1fr); }
+  .home-news-mini { grid-template-columns: 1fr !important; gap: 12px !important; }
 }
 
 /* ── Countdown Timer ──────────────────────────────── */
