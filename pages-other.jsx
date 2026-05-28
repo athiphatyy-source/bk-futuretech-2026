@@ -209,7 +209,7 @@ function DetailPage({ setScreen }) {
             <h3>ทรัพย์สินทางปัญญา</h3>
             <p>อนุสิทธิบัตรเลขที่ 12345 · เครื่องหมายการค้า KU AgriAI™</p>
 
-            <div style={{display:'flex', gap: 12, marginTop: 28, paddingTop: 24, borderTop:'1px solid var(--line)'}}>
+            <div className="detail-actions">
               <button className="btn btn-primary btn-lg" style={{flex:1}}>
                 <Icon.Handshake size={16}/> ขอเข้าร่วม Business Matching
               </button>

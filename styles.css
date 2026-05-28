@@ -1526,7 +1526,7 @@ table.data tbody tr:hover { background: var(--bg-soft); }
 }
 .detail-thumbs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   margin-bottom: 28px;
 }
@@ -1539,7 +1539,9 @@ table.data tbody tr:hover { background: var(--bg-soft); }
 }
 .detail-thumb.active { border-color: var(--ku-green); }
 
-.detail h1 { margin: 0 0 8px; font-size: 28px; font-weight: 600; }
+.detail { min-width: 0; }
+.detail h1 { margin: 0 0 8px; font-size: 28px; font-weight: 600; word-break: break-word; overflow-wrap: break-word; }
+.detail-actions { display: flex; gap: 12px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); flex-wrap: wrap; }
 .detail .sub-meta { color: var(--ink-3); font-size: 13.5px; margin-bottom: 18px; }
 .detail .tags { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
 .detail h3 { margin: 22px 0 10px; font-size: 16px; font-weight: 600; }
@@ -2085,6 +2087,18 @@ textarea {
 
   /* ── Detail shell ── */
   .detail-shell { padding: 20px 0; }
+  .detail h1 { font-size: 22px; word-break: break-word; overflow-wrap: break-word; }
+  .detail-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .detail-actions .btn { flex: 1 1 calc(50% - 5px); justify-content: center; }
+  .detail .breadcrumb { white-space: normal; word-break: break-word; }
 
   /* ── TRL ladder ── */
   .trl-ladder-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
@@ -2153,6 +2167,9 @@ textarea {
   .admin-top { padding: 8px 12px; }
   .admin-kpi-4, .admin-kpi-5 { grid-template-columns: 1fr !important; }
   .trl-picker-grid { grid-template-columns: repeat(3, 1fr); }
+  .detail h1 { font-size: 19px; }
+  .detail-actions .btn { flex: 1 1 100%; }
+  .detail-thumbs { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ── Countdown Timer ──────────────────────────────── */
