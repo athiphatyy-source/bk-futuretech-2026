@@ -54,7 +54,7 @@
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
 body {
   font-family: var(--font-thai);
   color: var(--ink);
@@ -1890,6 +1890,23 @@ textarea {
 }
 .bm-btn:hover { color: var(--ku-green); }
 
+/* ── TRL 9-picker grid ─────────────────────────────── */
+.trl-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 6px;
+}
+
+/* ── Table scroll wrapper ──────────────────────────── */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Filter toggle (visible only on mobile) ─────────── */
+.cat-filter-toggle { display: none; }
+
 /* ── Hamburger button (hidden on desktop) ─────────── */
 .nav-hamburger {
   display: none;
@@ -2025,11 +2042,52 @@ textarea {
   .auth-right { padding: 32px 20px; min-height: calc(100vh - 62px); }
   .sso-row { grid-template-columns: 1fr; gap: 8px; }
 
+  /* ── Catalogue shell ── */
+  .cat-shell { grid-template-columns: 1fr; padding: 20px 0; }
+  .cat-filters {
+    position: static !important;
+    display: none;          /* toggled via .cat-filters-open */
+  }
+  .cat-filters.open { display: block; }
+  .cat-filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background: #fff;
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-md);
+    font-size: 13.5px;
+    font-family: var(--font-thai);
+    color: var(--ink-2);
+    cursor: pointer;
+    margin-bottom: 14px;
+  }
+  .cat-toolbar { flex-wrap: wrap; gap: 10px; }
+  .cat-toolbar .search-input { max-width: 100%; order: -1; flex: 1 1 100%; }
+  .cat-toolbar select { flex: 1; }
+
+  /* ── Detail shell ── */
+  .detail-shell { padding: 20px 0; }
+
+  /* ── TRL ladder ── */
+  .trl-ladder-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .trl-ladder { grid-template-columns: repeat(9, minmax(90px, 1fr)); margin: 16px 0; }
+
   /* ── Admin shell ── */
   .admin-shell { grid-template-columns: 1fr; }
   .admin-side { display: none; }
   .admin-top { padding: 10px 14px; }
   .admin-search { max-width: none; flex: 1; }
+  /* Admin dashboard inline grids */
+  .admin-dash-grid { grid-template-columns: 1fr !important; }
+  .admin-kpi-4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .admin-kpi-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .admin-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .admin-grid-3 { grid-template-columns: 1fr !important; }
+  /* Admin table horizontal scroll */
+  .tbl-panel .table-scroll,
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   /* ── Section padding ── */
   .section { padding: 44px 0; }
@@ -2044,6 +2102,20 @@ textarea {
     text-align: center;
   }
   .footer-bar .links { flex-wrap: wrap; justify-content: center; }
+
+  /* ── TRL picker wrap on mobile ── */
+  .trl-picker-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .trl-picker-grid > div { padding: 10px 0 !important; }
+
+  /* ── Filter toggle visible on mobile ── */
+  .cat-filter-toggle { display: flex; }
+
+  /* ── Prevent ANY element from breaking out ── */
+  .container, .topnav-inner, .admin-main, .admin-content { max-width: 100%; }
+  img, video, iframe, table { max-width: 100%; }
 }
 
 /* ================================================================
@@ -2063,6 +2135,8 @@ textarea {
   .countdown-num { font-size: 16px; }
   .auth-right { padding: 24px 16px; }
   .admin-top { padding: 8px 12px; }
+  .admin-kpi-4, .admin-kpi-5 { grid-template-columns: 1fr !important; }
+  .trl-picker-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ── Countdown Timer ──────────────────────────────── */

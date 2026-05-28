@@ -168,7 +168,7 @@ function AdminSubmissions() {
         <button className="btn btn-primary"><Icon.Plus size={14}/> เพิ่มผลงานใหม่</button>
       </div>
 
-      <div className="kpi-row" style={{gridTemplateColumns:'repeat(4, 1fr)'}}>
+      <div className="kpi-row admin-kpi-4" style={{gridTemplateColumns:'repeat(4, 1fr)'}}>
         <div className="kpi-card">
           <div className="kpi-head"><div className="kpi-ic g1"><Icon.Doc size={20}/></div><div className="kpi-label">ทั้งหมด</div></div>
           <div className="kpi-value">312</div>
@@ -315,7 +315,7 @@ function AdminReview() {
 
           <div className="field" style={{marginTop: 16}}>
             <label>ระดับ TRL ที่เหมาะสม (Reviewer assess)</label>
-            <div style={{display:'grid', gridTemplateColumns:'repeat(9, 1fr)', gap: 4}}>
+            <div className="trl-picker-grid">
               {[1,2,3,4,5,6,7,8,9].map(i => (
                 <div key={i} onClick={() => setTrl(i)} style={{
                   padding:'10px 0', textAlign:'center', borderRadius: 6,
@@ -371,7 +371,7 @@ function AdminUsers() {
         <button className="btn btn-primary"><Icon.Plus size={14}/> เพิ่มผู้ใช้</button>
       </div>
 
-      <div className="kpi-row" style={{gridTemplateColumns:'repeat(5, 1fr)'}}>
+      <div className="kpi-row admin-kpi-5" style={{gridTemplateColumns:'repeat(5, 1fr)'}}>
         {[
           { l: 'ทั้งหมด', v: '1,248', c: 'g1', i: <Icon.User size={20}/> },
           { l: 'Innovator', v: '842', c: 'g2', i: <Icon.Leaf size={20}/> },
@@ -457,7 +457,7 @@ function AdminOrgs() {
         <button className="btn btn-primary"><Icon.Plus size={14}/> เพิ่มองค์กร</button>
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 16}}>
+      <div className="admin-grid-4" style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 16}}>
         {orgs.map((o,i) => (
           <div key={i} className="panel" style={{padding: 22}}>
             <div style={{display:'flex', alignItems:'center', gap:12, marginBottom: 14}}>
@@ -810,7 +810,7 @@ function AdminSettings() {
         {/* G5: Banner & Popup CMS (TOR 4.2.4) */}
         <div className="settings-card" style={{gridColumn:'1 / -1'}}>
           <h4 style={{marginBottom:16}}>จัดการ Banner &amp; Pop-up (CMS)</h4>
-          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:16}}>
+          <div className="admin-grid-3" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:16}}>
             {[
               { title:'Banner หน้าแรก', items:['BK FutureTech 2026 — เปิดรับสมัครแล้ว!', 'ร่วมงาน 24–25 มิ.ย. 2569 ที่ ม.เกษตรศาสตร์'] },
               { title:'Pop-up ประกาศ', items:['หมดเขตส่งผลงาน 31 พ.ค. 2569', 'ลงทะเบียนล่วงหน้าเต็มแล้ว — แจ้งรายชื่อสำรอง'] },

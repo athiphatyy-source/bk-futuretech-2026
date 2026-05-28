@@ -131,7 +131,7 @@ function AdminDashboardContent() {
         </div>
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'2fr 1fr', gap: 16}}>
+      <div className="admin-dash-grid" style={{display:'grid', gridTemplateColumns:'2fr 1fr', gap: 16}}>
         <div className="tbl-panel">
           <div className="tbl-head-row">
             <div>
@@ -142,6 +142,7 @@ function AdminDashboardContent() {
               <button className="btn btn-outline btn-sm">ดูทั้งหมด</button>
             </div>
           </div>
+          <div className="table-scroll">
           <table className="data">
             <thead>
               <tr>
@@ -163,6 +164,7 @@ function AdminDashboardContent() {
               ))}
             </tbody>
           </table>
+          </div>
           <div className="panel-foot"><a>ดูทั้งหมด →</a></div>
         </div>
 

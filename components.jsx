@@ -110,6 +110,7 @@ const Icon = {
   YT: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="currentColor" {...p}><path d="M22 8a3 3 0 0 0-2-2c-2-.5-8-.5-8-.5s-6 0-8 .5a3 3 0 0 0-2 2c-.5 2-.5 4-.5 4s0 2 .5 4a3 3 0 0 0 2 2c2 .5 8 .5 8 .5s6 0 8-.5a3 3 0 0 0 2-2c.5-2 .5-4 .5-4s0-2-.5-4ZM10 15V9l5 3z"/></svg>,
   LinkedIn: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="currentColor" {...p}><path d="M5 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3 9h4v12H3zM10 9h4v2c.7-1.3 2.2-2.3 4-2.3 3 0 4 2 4 5V21h-4v-6c0-1.5-.5-2.5-2-2.5s-2 1-2 2.5V21h-4z"/></svg>,
   MapPin: (p) => <svg viewBox="0 0 24 24" width={p.size||14} height={p.size||14} fill="none" stroke="currentColor" strokeWidth="1.7" {...p}><path d="M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z" /><circle cx="12" cy="9" r="3" /></svg>,
+  Filter: (p) => <svg viewBox="0 0 24 24" width={p.size||16} height={p.size||16} fill="none" stroke="currentColor" strokeWidth="1.7" {...p}><path d="M4 6h16M7 12h10M10 18h4" strokeLinecap="round" /></svg>,
 };
 
 // ---------- Top Nav ----------

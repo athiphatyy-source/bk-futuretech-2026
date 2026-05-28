@@ -3,6 +3,7 @@
 
 // ============ Innovation Catalogue ============
 function CataloguePage({ setScreen }) {
+  const [filterOpen, setFilterOpen] = React.useState(false);
   const items = [
     { tag: 'AGRI-TECH', tagClass: '', title: 'ระบบ AI วิเคราะห์โรคพืชจากภาพถ่าย', desc: 'ใช้ Computer Vision และ Deep Learning ตรวจจับโรคพืชอัตโนมัติ', trl: 7, org: 'Kasetsart University', cover: 'agri', label: 'AGRI · AI VISION' },
     { tag: 'FOOD-TECH', tagClass: 'food', title: 'โปรตีนจากพืชทางเลือกใหม่', desc: 'นวัตกรรมอาหารเพื่อสุขภาพและความยั่งยืน', trl: 6, org: 'Kasetsart University', cover: 'food', label: 'FOOD · PLANT-BASED' },
@@ -31,7 +32,10 @@ function CataloguePage({ setScreen }) {
       <div className="container">
         <div className="cat-shell">
           {/* ============ Filters ============ */}
-          <aside className="cat-filters">
+          <button className="cat-filter-toggle" onClick={() => setFilterOpen(o => !o)}>
+            <Icon.Filter size={15}/> ตัวกรอง {filterOpen ? '▲' : '▼'}
+          </button>
+          <aside className={`cat-filters${filterOpen ? ' open' : ''}`}>
             <h4>หมวดเทคโนโลยี</h4>
             <div className="filter-group" style={{paddingTop: 0}}>
               {[
@@ -463,7 +467,7 @@ function SubmitPage({ setScreen }) {
 
               <div className="field">
                 <label>รูปภาพประกอบ (สูงสุด 8 รูป)</label>
-                <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 10}}>
+                <div className="admin-grid-4" style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 10}}>
                   {[0,1,2].map(i => (
                     <div key={i} style={{aspectRatio:'1/1', borderRadius:10, overflow:'hidden'}}>
                       <ImgPH kind={['agri','tech','env'][i]} label={`IMG ${i+1}`} />
@@ -520,7 +524,7 @@ function SubmitPage({ setScreen }) {
 
               <div className="field">
                 <label>ระดับความพร้อมของเทคโนโลยี (TRL) <span className="req">*</span></label>
-                <div style={{display:'grid', gridTemplateColumns:'repeat(9, 1fr)', gap: 6, marginTop: 8}}>
+                <div className="trl-picker-grid" style={{marginTop: 8}}>
                   {[1,2,3,4,5,6,7,8,9].map(i => (
                     <div key={i} style={{
                       padding:'14px 0', textAlign:'center', borderRadius: 8,
@@ -539,7 +543,7 @@ function SubmitPage({ setScreen }) {
 
               <div className="field">
                 <label>ระดับความพร้อมทางสังคม (SRL)</label>
-                <div style={{display:'grid', gridTemplateColumns:'repeat(9, 1fr)', gap: 6, marginTop: 8}}>
+                <div className="trl-picker-grid" style={{marginTop: 8}}>
                   {[1,2,3,4,5,6,7,8,9].map(i => (
                     <div key={i} style={{
                       padding:'14px 0', textAlign:'center', borderRadius: 8,
@@ -721,17 +725,19 @@ function KnowledgePage({ setScreen }) {
 
         {(tab === 'trl' || tab === 'srl') && (
           <>
-            <div className="trl-ladder">
-              {trlLevels.map((l, i) => (
-                <div key={i} className="trl-step">
-                  <div className="lvl">{tab === 'trl' ? 'TRL' : 'SRL'}</div>
-                  <div className="num">{l.lvl}</div>
-                  <div className="lbl">{l.ttl}</div>
-                </div>
-              ))}
+            <div className="trl-ladder-wrap">
+              <div className="trl-ladder">
+                {trlLevels.map((l, i) => (
+                  <div key={i} className="trl-step">
+                    <div className="lvl">{tab === 'trl' ? 'TRL' : 'SRL'}</div>
+                    <div className="num">{l.lvl}</div>
+                    <div className="lbl">{l.ttl}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 16, padding:'8px 0 40px'}}>
+            <div className="admin-grid-3" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 16, padding:'8px 0 40px'}}>
               {trlLevels.slice(0, 9).map((l, i) => (
                 <div key={i} className="panel" style={{padding: 18}}>
                   <div style={{display:'flex', alignItems:'center', gap:12, marginBottom: 8}}>
