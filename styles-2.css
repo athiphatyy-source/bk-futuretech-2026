@@ -811,6 +811,7 @@
 
   /* Account */
   .acc-shell { grid-template-columns: 1fr; }
+  .acc-side { position: static; }
   .acc-stats { grid-template-columns: repeat(2, 1fr); }
 
   /* Review / Settings */

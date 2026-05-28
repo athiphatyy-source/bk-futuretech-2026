@@ -2042,6 +2042,22 @@ textarea {
   .auth-right { padding: 32px 20px; min-height: calc(100vh - 62px); }
   .sso-row { grid-template-columns: 1fr; gap: 8px; }
 
+  /* ── Auth ── */
+  .auth-right { padding: 24px 20px !important; }
+  .sso-row { grid-template-columns: 1fr; gap: 8px; }
+  .row-2 { grid-template-columns: 1fr; gap: 12px; }
+
+  /* ── Admin page-head (title + add button) ── */
+  .page-head { flex-wrap: wrap; gap: 10px; align-items: flex-start; }
+  .page-head h1 { font-size: 22px; }
+  .page-head .btn { white-space: nowrap; }
+
+  /* ── Admin top bar ── */
+  .admin-top .right .admin-user-mini .who { display: none; }
+
+  /* ── Admin dash 2-col layouts → 1-col ── */
+  .admin-dash-grid { grid-template-columns: 1fr !important; }
+
   /* ── Catalogue shell ── */
   .cat-shell { grid-template-columns: 1fr; padding: 20px 0; }
   .cat-filters {

@@ -200,7 +200,7 @@ function AdminSubmissions() {
           {/* G4: Bulk upload */}
           <BulkUploadBtn />
         </div>
-        <table className="data">
+        <div className="table-scroll"><table className="data">
           <thead>
             <tr>
               <th><input type="checkbox" /></th>
@@ -224,7 +224,7 @@ function AdminSubmissions() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
         <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', paddingTop:16, marginTop:12, borderTop:'1px solid var(--line)'}}>
           <div style={{fontSize:13, color:'var(--ink-3)'}}>แสดง 1–8 จาก 312 รายการ</div>
           <div style={{display:'flex', gap: 4}}>
@@ -399,7 +399,7 @@ function AdminUsers() {
           <select><option>สถานะทั้งหมด</option></select>
           <button className="btn btn-outline btn-sm" style={{marginLeft:'auto'}}><Icon.Doc size={14}/> Export</button>
         </div>
-        <table className="data">
+        <div className="table-scroll"><table className="data">
           <thead>
             <tr>
               <th><input type="checkbox" /></th>
@@ -428,7 +428,7 @@ function AdminUsers() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
       </div>
     </>
   );
@@ -519,7 +519,7 @@ function AdminEvents() {
           <select><option>วันทั้งหมด</option><option>24 มิ.ย.</option><option>25 มิ.ย.</option></select>
           <select><option>สถานะทั้งหมด</option><option>Published</option><option>Draft</option></select>
         </div>
-        <table className="data">
+        <div className="table-scroll"><table className="data">
           <thead><tr><th></th><th>วัน</th><th>เวลา</th><th>ชื่อกิจกรรม</th><th>สถานที่</th><th>ผู้ลงทะเบียน</th><th>สถานะ</th><th></th></tr></thead>
           <tbody>
             {events.map((e,i) => (
@@ -537,7 +537,7 @@ function AdminEvents() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
       </div>
     </>
   );
@@ -573,7 +573,7 @@ function AdminNews() {
           <select><option>หมวดทั้งหมด</option></select>
           <select><option>สถานะทั้งหมด</option></select>
         </div>
-        <table className="data">
+        <div className="table-scroll"><table className="data">
           <thead><tr><th></th><th>หัวข้อ</th><th>หมวด</th><th>ผู้เข้าชม</th><th>สถานะ</th><th>วันที่</th><th></th></tr></thead>
           <tbody>
             {posts.map((p,i) => (
@@ -591,7 +591,7 @@ function AdminNews() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
       </div>
     </>
   );
@@ -647,10 +647,10 @@ function AdminReports() {
         </div>
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16}}>
+      <div className="admin-dash-grid" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16}}>
         <div className="tbl-panel">
           <h3 style={{margin:'0 0 16px', fontSize: 16, fontWeight: 600}}>Top Organizations</h3>
-          <table className="data">
+          <div className="table-scroll"><table className="data">
             <thead><tr><th>#</th><th>องค์กร</th><th>ผลงาน</th><th>อนุมัติ</th><th>%</th></tr></thead>
             <tbody>
               {[
@@ -676,12 +676,12 @@ function AdminReports() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div className="tbl-panel">
           <h3 style={{margin:'0 0 16px', fontSize: 16, fontWeight: 600}}>Activity Logs (Audit)</h3>
-          <table className="data">
+          <div className="table-scroll"><table className="data">
             <thead><tr><th>เวลา</th><th>ผู้ใช้</th><th>การกระทำ</th></tr></thead>
             <tbody>
               {[
@@ -699,7 +699,7 @@ function AdminReports() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
         </div>
       </div>
     </>
@@ -935,7 +935,7 @@ function AdminBizMatch() {
         </div>
       </div>
       <div className="tbl-panel">
-        <table className="data">
+        <div className="table-scroll"><table className="data">
           <thead><tr><th>ID</th><th>Innovation</th><th>Partner</th><th>Slot</th><th>สถานะ</th><th></th></tr></thead>
           <tbody>
             {[
@@ -955,7 +955,7 @@ function AdminBizMatch() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
       </div>
     </>
   );
@@ -971,7 +971,7 @@ function AdminKnowledge() {
         </div>
         <button className="btn btn-primary"><Icon.Plus size={14}/> เพิ่มเนื้อหา</button>
       </div>
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap: 16}}>
+      <div className="admin-dash-grid" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap: 16}}>
         <div className="panel">
           <h3 style={{margin:'0 0 14px', fontSize: 16, fontWeight: 600}}>เอกสาร TRL/SRL</h3>
           {[
@@ -1029,7 +1029,7 @@ function AdminAuditLogs() {
           <select><option>ประเภททั้งหมด</option><option>Login</option><option>Edit</option><option>Status Change</option></select>
           <select><option>วันนี้</option><option>7 วันที่ผ่านมา</option><option>30 วัน</option></select>
         </div>
-        <table className="data">
+        <div className="table-scroll"><table className="data">
           <thead><tr><th>Timestamp</th><th>User</th><th>IP</th><th>Action</th><th>Target</th><th>Result</th></tr></thead>
           <tbody>
             {[
@@ -1052,7 +1052,7 @@ function AdminAuditLogs() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
       </div>
     </>
   );
