@@ -2105,9 +2105,11 @@ textarea {
   .trl-ladder { grid-template-columns: repeat(9, minmax(90px, 1fr)); margin: 16px 0; }
 
   /* ── Admin shell ── */
-  .admin-shell { grid-template-columns: 1fr; }
+  .admin-shell { grid-template-columns: minmax(0, 1fr); }
   .admin-side { display: none; }
-  .admin-top { padding: 10px 14px; }
+  .admin-main { min-width: 0; overflow-x: hidden; }
+  .admin-body { min-width: 0; }
+  .admin-top { padding: 10px 14px; min-width: 0; }
   .admin-search { max-width: none; flex: 1; }
   /* Admin dashboard inline grids */
   .admin-dash-grid { grid-template-columns: 1fr !important; }
