@@ -73,14 +73,15 @@ function AuthLeftPanel({ withFeatures = false }) {
   );
 }
 
-function LoginPage({ setScreen, onLogin }) {
+function LoginPage({ setScreen, onLogin, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [show, setShow] = useState(false);
   return (
     <div data-screen-label="02 Login" className="auth-shell">
       <AuthLeftPanel />
       <div className="auth-right">
         <div className="auth-card">
-          <h2>เข้าสู่ระบบ</h2>
+          <h2>{isEn ? 'Sign In' : 'เข้าสู่ระบบ'}</h2>
           <p className="auth-sub">BK FutureTech 2026 Master Platform</p>
           <div className="auth-divider" />
 
@@ -99,10 +100,10 @@ function LoginPage({ setScreen, onLogin }) {
               <span className="input-suffix" onClick={() => setShow(!show)}><Icon.Eye /></span>
             </div>
           </div>
-          <div className="forgot">ลืมรหัสผ่าน?</div>
-          <button className="btn btn-primary" onClick={onLogin}>เข้าสู่ระบบ</button>
+          <div className="forgot">{isEn ? 'Forgot password?' : 'ลืมรหัสผ่าน?'}</div>
+          <button className="btn btn-primary" onClick={onLogin}>{isEn ? 'Sign In' : 'เข้าสู่ระบบ'}</button>
 
-          <div className="or-divider">หรือเข้าสู่ระบบด้วย</div>
+          <div className="or-divider">{isEn ? 'or sign in with' : 'หรือเข้าสู่ระบบด้วย'}</div>
           <div className="sso-row">
             <button className="sso-btn">
               <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6 8-11.3 8a12 12 0 1 1 0-24c3 0 5.7 1.1 7.8 3l5.7-5.7C33.9 6.1 29.2 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.2-.1-2.4-.4-3.5"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.7 1.1 7.8 3l5.7-5.7C33.9 6.1 29.2 4 24 4 16.3 4 9.7 8.4 6.3 14.7"/><path fill="#4CAF50" d="M24 44c5.2 0 9.8-2 13.3-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.2-8l-6.5 5C9.5 39.5 16.2 44 24 44"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3a12 12 0 0 1-4.1 5.6l6.2 5.2C40.6 36 44 30.5 44 24c0-1.2-.1-2.4-.4-3.5"/></svg>
@@ -132,7 +133,8 @@ function LoginPage({ setScreen, onLogin }) {
   );
 }
 
-function RegisterPage({ setScreen, onLogin }) {
+function RegisterPage({ setScreen, onLogin, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [step, setStep] = useState(1);
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -158,7 +160,7 @@ function RegisterPage({ setScreen, onLogin }) {
       <AuthLeftPanel withFeatures={true} />
       <div className="auth-right" style={{padding: '40px 56px'}}>
         <div className="auth-card" style={{maxWidth: 540}}>
-          <h2>สร้างบัญชีผู้ใช้</h2>
+          <h2>{isEn ? 'Create Account' : 'สร้างบัญชีผู้ใช้'}</h2>
           <p className="auth-sub">เข้าร่วมเป็นส่วนหนึ่งของ BK FutureTech 2026</p>
           <Steps />
 

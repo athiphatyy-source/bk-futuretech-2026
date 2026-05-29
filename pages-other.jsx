@@ -2,7 +2,8 @@
 // Catalogue + Detail + Submit + Knowledge
 
 // ============ Innovation Catalogue ============
-function CataloguePage({ setScreen }) {
+function CataloguePage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [filterOpen, setFilterOpen] = React.useState(false);
   const items = [
     { tag: 'AGRI-TECH', tagClass: '', title: 'ระบบ AI วิเคราะห์โรคพืชจากภาพถ่าย', desc: 'ใช้ Computer Vision และ Deep Learning ตรวจจับโรคพืชอัตโนมัติ', trl: 7, org: 'Kasetsart University', cover: 'agri', label: 'AGRI · AI VISION' },
@@ -21,10 +22,9 @@ function CataloguePage({ setScreen }) {
       <div style={{background: 'var(--gradient-hero)', color:'#fff', padding:'56px 0 40px'}}>
         <div className="container">
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:8}}>INNOVATION CATALOGUE</div>
-          <h1 style={{margin:'0 0 8px', fontSize: 36, fontWeight: 600}}>นวัตกรรมจาก BK FutureTech 2026</h1>
+          <h1 style={{margin:'0 0 8px', fontSize: 36, fontWeight: 600}}>{isEn ? 'Innovations from BK FutureTech 2026' : 'นวัตกรรมจาก BK FutureTech 2026'}</h1>
           <p style={{color:'#B7C8D7', maxWidth: 640, fontSize: 15}}>
-            ค้นพบผลงานนวัตกรรมกว่า 300 ชิ้นจากมหาวิทยาลัยเกษตรศาสตร์และเครือข่ายพันธมิตร
-            ครอบคลุมด้านเกษตร อาหาร สิ่งแวดล้อม และเทคโนโลยีชีวภาพ
+            {isEn ? 'Discover over 300 innovations from Kasetsart University and partner network — covering agriculture, food, environment, and biotechnology.' : 'ค้นพบผลงานนวัตกรรมกว่า 300 ชิ้นจากมหาวิทยาลัยเกษตรศาสตร์และเครือข่ายพันธมิตร ครอบคลุมด้านเกษตร อาหาร สิ่งแวดล้อม และเทคโนโลยีชีวภาพ'}
           </p>
         </div>
       </div>
@@ -143,15 +143,16 @@ function CataloguePage({ setScreen }) {
 }
 
 // ============ Innovation Detail ============
-function DetailPage({ setScreen }) {
+function DetailPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [thumb, setThumb] = useState(0);
   return (
     <div data-screen-label="06 Innovation Detail">
       <div className="container">
         <div style={{padding: '24px 0 0', color:'var(--ink-3)', fontSize: 13.5, display:'flex', gap:6, alignItems:'center'}}>
-          <a onClick={() => setScreen('home')} style={{cursor:'pointer'}}>หน้าแรก</a>
+          <a onClick={() => setScreen('home')} style={{cursor:'pointer'}}>{isEn ? 'Home' : 'หน้าแรก'}</a>
           <Icon.ChevronRight size={12} />
-          <a onClick={() => setScreen('catalogue')} style={{cursor:'pointer'}}>นวัตกรรม</a>
+          <a onClick={() => setScreen('catalogue')} style={{cursor:'pointer'}}>{isEn ? 'Innovations' : 'นวัตกรรม'}</a>
           <Icon.ChevronRight size={12} />
           <span style={{color:'var(--ink)'}}>ระบบ AI วิเคราะห์โรคพืชจากภาพถ่าย</span>
         </div>
@@ -274,11 +275,19 @@ function DetailPage({ setScreen }) {
 }
 
 // ============ Submit Innovation (Multi-step) ============
-function SubmitPage({ setScreen }) {
+function SubmitPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [step, setStep] = useState(1);
   const totalSteps = 6;
 
-  const steps = [
+  const steps = isEn ? [
+    { n: 1, t: 'Innovation Info', s: 'Title, abstract, category' },
+    { n: 2, t: 'Owner Info', s: 'Name, organization, contact' },
+    { n: 3, t: 'IP Rights', s: 'Patent, petty patent' },
+    { n: 4, t: 'Documents & Media', s: 'Images, video, PDF' },
+    { n: 5, t: 'TRL/SRL Assessment', s: 'Self-assessment form' },
+    { n: 6, t: 'Review & Submit', s: 'Preview & Submit' },
+  ] : [
     { n: 1, t: 'ข้อมูลผลงาน', s: 'ชื่อผลงาน บทคัดย่อ หมวด' },
     { n: 2, t: 'ข้อมูลเจ้าของ', s: 'ชื่อ หน่วยงาน ติดต่อ' },
     { n: 3, t: 'ทรัพย์สินทางปัญญา', s: 'สิทธิบัตร อนุสิทธิบัตร' },
@@ -291,9 +300,9 @@ function SubmitPage({ setScreen }) {
     <div data-screen-label="07 Submit">
       <div style={{background: '#fff', borderBottom: '1px solid var(--line)', padding: '24px 0'}}>
         <div className="container">
-          <h1 style={{margin:'0 0 4px', fontSize: 26, fontWeight: 600}}>ส่งผลงานนวัตกรรม</h1>
+          <h1 style={{margin:'0 0 4px', fontSize: 26, fontWeight: 600}}>{isEn ? 'Submit Innovation' : 'ส่งผลงานนวัตกรรม'}</h1>
           <p style={{margin:0, color:'var(--ink-3)', fontSize: 14}}>
-            ยื่นเสนอผลงานเข้าสู่ระบบ BK FutureTech 2026 พร้อมระบุระดับ TRL/SRL ด้วยตนเอง
+            {isEn ? 'Submit your innovation to BK FutureTech 2026 and self-assess TRL/SRL levels.' : 'ยื่นเสนอผลงานเข้าสู่ระบบ BK FutureTech 2026 พร้อมระบุระดับ TRL/SRL ด้วยตนเอง'}
           </p>
         </div>
       </div>
@@ -643,7 +652,8 @@ function SubmitPage({ setScreen }) {
 }
 
 // ============ TRL/SRL Knowledge Center + Self-Assessment ============
-function KnowledgePage({ setScreen }) {
+function KnowledgePage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [tab, setTab] = useState('trl'); // trl | srl | quiz
   const [q, setQ] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -703,9 +713,8 @@ function KnowledgePage({ setScreen }) {
           <div style={{display:'flex', alignItems:'center', gap:8, fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom: 12}}>
             <Icon.Book size={14} /> TRL / SRL KNOWLEDGE CENTER
           </div>
-          <h1>เข้าใจระดับความพร้อม<br/><span className="gradient">ของเทคโนโลยีและสังคม</span></h1>
-          <p>เรียนรู้แนวคิด TRL (Technology Readiness Level) และ SRL (Social Readiness Level)
-          พร้อมเครื่องมือประเมินตนเองเพื่อระบุระดับความพร้อมของผลงานนวัตกรรมของคุณได้อย่างถูกต้อง</p>
+          <h1>{isEn ? <>Understanding Readiness Levels<br/><span className="gradient">of Technology and Society</span></> : <>เข้าใจระดับความพร้อม<br/><span className="gradient">ของเทคโนโลยีและสังคม</span></>}</h1>
+          <p>{isEn ? 'Learn about TRL (Technology Readiness Level) and SRL (Social Readiness Level), with self-assessment tools to accurately identify your innovation\'s readiness.' : 'เรียนรู้แนวคิด TRL (Technology Readiness Level) และ SRL (Social Readiness Level) พร้อมเครื่องมือประเมินตนเองเพื่อระบุระดับความพร้อมของผลงานนวัตกรรมของคุณได้อย่างถูกต้อง'}</p>
 
           <div style={{display:'flex', gap:10, marginTop: 22}}>
             <button className={`btn ${tab==='trl' ? 'btn-solid-green' : 'btn-ghost-on-dark'}`} onClick={() => setTab('trl')}>
@@ -715,10 +724,10 @@ function KnowledgePage({ setScreen }) {
               <Icon.Network size={16}/> SRL 1–9
             </button>
             <button className={`btn ${tab==='quiz' ? 'btn-solid-green' : 'btn-ghost-on-dark'}`} onClick={() => setTab('quiz')}>
-              <Icon.Target size={16}/> เริ่มประเมินตนเอง
+              <Icon.Target size={16}/> {isEn ? 'Start Self-Assessment' : 'เริ่มประเมินตนเอง'}
             </button>
             <button className="btn btn-ghost-on-dark">
-              <Icon.Doc size={16}/> ดาวน์โหลดเอกสาร (PDF)
+              <Icon.Doc size={16}/> {isEn ? 'Download Guide (PDF)' : 'ดาวน์โหลดเอกสาร (PDF)'}
             </button>
           </div>
         </div>

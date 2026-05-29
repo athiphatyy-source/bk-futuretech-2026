@@ -1,7 +1,49 @@
 /* eslint-disable no-undef */
 // Landing page (Home)
 
-function HomePage({ setScreen }) {
+function HomePage({ setScreen, lang = 'th' }) {
+  const L = lang === 'en' ? {
+    h1a: 'Connecting Innovation',
+    h1b: 'Towards a Sustainable Future',
+    subhead: 'Central platform for agricultural, food, and environmental innovation — bridging research, technology, and business for real-world impact.',
+    btnRegister: 'Register Now',
+    btnBrowse: 'View Program',
+    cdLabel: 'Event starts in',
+    cdUnits: ['Days', 'Hrs', 'Mins', 'Secs'],
+    cdLive: '🎉 The event has started! 24–25 Jun 2026',
+    statLabels: ['Innovations', 'Researchers & Teams', 'Organizations', 'Attendees'],
+    platform: 'Platform for You',
+    more: 'Learn more',
+    featuredInno: 'Featured Innovations',
+    viewAll: 'View All',
+    events: 'Highlight Events',
+    viewAllEvents: 'View Full Schedule',
+    news: 'News & Updates',
+    readMore: 'Read More',
+    statsTitle: 'Last Year by the Numbers',
+    statCells: ['Attendees', 'Innovations Presented', 'Investors & Partners', 'Events', 'Platform Views'],
+  } : {
+    h1a: 'เชื่อมโยงนวัตกรรม',
+    h1b: 'สู่อนาคตที่ยั่งยืน',
+    subhead: 'แพลตฟอร์มกลางด้านนวัตกรรมเกษตร อาหาร และสิ่งแวดล้อม — เชื่อมโยงงานวิจัย เทคโนโลยี และภาคธุรกิจ สู่การใช้ประโยชน์จริง',
+    btnRegister: 'ลงทะเบียนเข้าร่วมงาน',
+    btnBrowse: 'ดูโปรแกรมงาน',
+    cdLabel: 'เริ่มงานใน',
+    cdUnits: ['วัน', 'ชม.', 'นาที', 'วินาที'],
+    cdLive: '🎉 งานเริ่มแล้ว! 24–25 มิ.ย. 2569',
+    statLabels: ['นวัตกรรมนำเสนอ', 'นักวิจัย & ทีม', 'องค์กร & บริษัท', 'ผู้เข้าร่วม'],
+    platform: 'แพลตฟอร์มสำหรับคุณ',
+    more: 'รายละเอียด',
+    featuredInno: 'นวัตกรรมเด่น',
+    viewAll: 'ดูทั้งหมด',
+    events: 'กิจกรรมไฮไลต์',
+    viewAllEvents: 'ดูโปรแกรมทั้งหมด',
+    news: 'ข่าวสารและอัปเดต',
+    readMore: 'อ่านต่อ',
+    statsTitle: 'ตัวเลขสะท้อนความสำเร็จปีที่ผ่านมา',
+    statCells: ['ผู้เข้าร่วมงาน', 'ผลงานนวัตกรรมนำเสนอ', 'นักลงทุน & พันธมิตร', 'กิจกรรม', 'การเข้าชมแพลตฟอร์ม'],
+  };
+
   // G1: Countdown to 24 Jun 2026 08:00 ICT (UTC+7 = 01:00 UTC)
   const EVENT_DATE = new Date('2026-06-24T01:00:00Z');
   const [countdown, setCountdown] = useState(() => Math.max(0, EVENT_DATE - new Date()));
@@ -17,7 +59,13 @@ function HomePage({ setScreen }) {
   const cdMins  = Math.floor((countdown % 3600000) / 60000);
   const cdSecs  = Math.floor((countdown % 60000) / 1000);
 
-  const features = [
+  const features = lang === 'en' ? [
+    { ic: 'plus', label: 'Submit Innovation', desc: 'Submit your research / innovation\nfor presentation and competition', target: 'submit', color: 'green' },
+    { ic: 'clip', label: 'TRL / SRL Assessment', desc: 'Evaluate the readiness level\nof your technology and society', target: 'knowledge', color: 'blue' },
+    { ic: 'shake', label: 'Business Matching', desc: 'Connect researchers, investors,\npartners, and entrepreneurs', target: 'matching', color: 'green' },
+    { ic: 'cal', label: 'Register for Event', desc: 'Register to attend\nvarious activities', target: 'register', color: 'green' },
+    { ic: 'book', label: 'Knowledge Base', desc: 'Access documents, videos,\nand innovation resources', target: 'knowledge', color: 'green' },
+  ] : [
     { ic: 'plus', label: 'ส่งผลงานนวัตกรรม', desc: 'ส่งผลงานวิจัย / นวัตกรรม\nเพื่อนำเสนอและเข้าร่วมประกวด', target: 'submit', color: 'green' },
     { ic: 'clip', label: 'ประเมิน TRL / SRL', desc: 'ตรวจสอบระดับความพร้อม\nของเทคโนโลยีและสังคมของคุณ', target: 'knowledge', color: 'blue' },
     { ic: 'shake', label: 'จับคู่ธุรกิจ', desc: 'เชื่อมโยงนักวิจัย นักลงทุน\nพันธมิตร และผู้ประกอบการ', target: 'matching', color: 'green' },
@@ -48,28 +96,25 @@ function HomePage({ setScreen }) {
           <div className="hero-grid">
             <div>
               <h1>
-                เชื่อมโยงนวัตกรรม
-                <span className="accent">สู่อนาคตที่ยั่งยืน</span>
+                {L.h1a}
+                <span className="accent">{L.h1b}</span>
               </h1>
-              <p className="subhead">
-                แพลตฟอร์มกลางด้านนวัตกรรมเกษตร อาหาร และสิ่งแวดล้อม<br/>
-                เชื่อมโยงงานวิจัย เทคโนโลยี และภาคธุรกิจ สู่การใช้ประโยชน์จริง
-              </p>
+              <p className="subhead">{L.subhead}</p>
               <div className="hero-actions">
                 <button className="btn btn-primary btn-lg" onClick={() => setScreen('register')}>
-                  <Icon.User size={16} /> ลงทะเบียนเข้าร่วมงาน
+                  <Icon.User size={16} /> {L.btnRegister}
                 </button>
                 <button className="btn btn-ghost-on-dark btn-lg" onClick={() => setScreen('catalogue')}>
-                  ดูโปรแกรมงาน
+                  {L.btnBrowse}
                 </button>
               </div>
               {/* G1: Countdown timer */}
               <div className="hero-countdown">
                 {countdown > 0 ? (
                   <>
-                    <div className="countdown-label">เริ่มงานใน</div>
+                    <div className="countdown-label">{L.cdLabel}</div>
                     <div className="countdown-boxes">
-                      {[{ v: cdDays, u: 'วัน' }, { v: cdHours, u: 'ชม.' }, { v: cdMins, u: 'นาที' }, { v: cdSecs, u: 'วินาที' }].map(({ v, u }) => (
+                      {[{ v: cdDays, u: L.cdUnits[0] }, { v: cdHours, u: L.cdUnits[1] }, { v: cdMins, u: L.cdUnits[2] }, { v: cdSecs, u: L.cdUnits[3] }].map(({ v, u }) => (
                         <div className="countdown-box" key={u}>
                           <span className="countdown-num">{String(v).padStart(2, '0')}</span>
                           <span className="countdown-unit">{u}</span>
@@ -78,26 +123,26 @@ function HomePage({ setScreen }) {
                     </div>
                   </>
                 ) : (
-                  <div className="countdown-live">🎉 งานเริ่มแล้ว! 24–25 มิ.ย. 2569</div>
+                  <div className="countdown-live">{L.cdLive}</div>
                 )}
               </div>
 
               <div className="hero-stats">
                 <div className="hero-stat">
                   <div className="hero-stat-row"><Icon.Leaf size={16} style={{color:'#00C26E'}} /> 500+</div>
-                  <div className="hero-stat-label">นวัตกรรมนำเสนอ</div>
+                  <div className="hero-stat-label">{L.statLabels[0]}</div>
                 </div>
                 <div className="hero-stat">
                   <div className="hero-stat-row"><Icon.User size={14} style={{color:'#00B8D9'}} /> 200+</div>
-                  <div className="hero-stat-label">นักวิจัย &amp; ทีม</div>
+                  <div className="hero-stat-label">{L.statLabels[1]}</div>
                 </div>
                 <div className="hero-stat">
                   <div className="hero-stat-row"><Icon.Handshake size={16} style={{color:'#00C26E'}} /> 150+</div>
-                  <div className="hero-stat-label">องค์กร &amp; บริษัท</div>
+                  <div className="hero-stat-label">{L.statLabels[2]}</div>
                 </div>
                 <div className="hero-stat">
                   <div className="hero-stat-row"><Icon.Network size={16} style={{color:'#F4B400'}} /> 10,000+</div>
-                  <div className="hero-stat-label">ผู้เข้าร่วม</div>
+                  <div className="hero-stat-label">{L.statLabels[3]}</div>
                 </div>
               </div>
             </div>
@@ -165,7 +210,7 @@ function HomePage({ setScreen }) {
       {/* ==================== PLATFORM FOR YOU ==================== */}
       <section className="section">
         <div className="container">
-          <h2 className="section-title">แพลตฟอร์มสำหรับคุณ</h2>
+          <h2 className="section-title">{L.platform}</h2>
           <div className="feature-grid">
             {features.map((f, i) => (
               <div key={i} className="feature-card" onClick={() => setScreen(f.target)}>
@@ -178,7 +223,7 @@ function HomePage({ setScreen }) {
                 </div>
                 <h3>{f.label}</h3>
                 <p style={{whiteSpace:'pre-line'}}>{f.desc}</p>
-                <div className="more">รายละเอียด <Icon.ArrowRight /></div>
+                <div className="more">{L.more} <Icon.ArrowRight /></div>
               </div>
             ))}
           </div>
@@ -189,8 +234,8 @@ function HomePage({ setScreen }) {
       <section className="section-tight">
         <div className="container">
           <div className="section-head-row">
-            <h2>นวัตกรรมเด่น</h2>
-            <a className="see-all" onClick={() => setScreen('catalogue')}>ดูทั้งหมด <Icon.ArrowRight /></a>
+            <h2>{L.featuredInno}</h2>
+            <a className="see-all" onClick={() => setScreen('catalogue')}>{L.viewAll} <Icon.ArrowRight /></a>
           </div>
           <div className="inno-row-wrap">
             <div className="arrow left"><Icon.ChevronLeft /></div>
@@ -225,8 +270,8 @@ function HomePage({ setScreen }) {
             {/* Events */}
             <div>
               <div className="section-head-row">
-                <h2>กิจกรรมไฮไลต์</h2>
-                <a className="see-all">ดูทั้งหมด <Icon.ArrowRight /></a>
+                <h2>{L.events}</h2>
+                <a className="see-all">{L.viewAll} <Icon.ArrowRight /></a>
               </div>
               <div className="events-list">
                 {events.map((e, i) => (
@@ -241,23 +286,23 @@ function HomePage({ setScreen }) {
                   </div>
                 ))}
               </div>
-              <button className="btn btn-solid-blue" style={{width:'100%', marginTop: 14, padding: 14}}>
-                ดูโปรแกรมทั้งหมด <Icon.ArrowRight />
+              <button className="btn btn-solid-blue" style={{width:'100%', marginTop: 14, padding: 14}} onClick={() => setScreen('events')}>
+                {L.viewAllEvents} <Icon.ArrowRight />
               </button>
             </div>
 
             {/* News */}
             <div>
               <div className="section-head-row">
-                <h2>ข่าวสารและอัปเดต</h2>
-                <a className="see-all">ดูทั้งหมด <Icon.ArrowRight /></a>
+                <h2>{L.news}</h2>
+                <a className="see-all">{L.viewAll} <Icon.ArrowRight /></a>
               </div>
               <div className="news-feature">
                 <div>
                   <span className="date-pill">15 JUN 2026</span>
                   <h3>เปิดรับผลงานนวัตกรรม<br/>BK FutureTech 2026 แล้ววันนี้!</h3>
                   <p>ส่งผลงานนวัตกรรมเข้าร่วมประกวด ชิงรางวัลและโอกาส<br/>ต่อยอดเชิงพาณิชย์</p>
-                  <button className="btn btn-solid-green btn-sm">อ่านต่อ <Icon.ArrowRight /></button>
+                  <button className="btn btn-solid-green btn-sm">{L.readMore} <Icon.ArrowRight /></button>
                   <div className="dots"><span className="on" /><span /><span /></div>
                 </div>
                 <div className="visual">
@@ -296,27 +341,27 @@ function HomePage({ setScreen }) {
       <section className="section-tight">
         <div className="container">
           <div className="stats-band">
-            <h3>ตัวเลขสะท้อนความสำเร็จปีที่ผ่านมา</h3>
+            <h3>{L.statsTitle}</h3>
             <div className="stats-row">
               <div className="stat-cell">
                 <div className="ic"><Icon.User size={20} style={{color:'#00C26E'}}/></div>
-                <div><div className="num">8,250+</div><div className="lbl">ผู้เข้าร่วมงาน</div></div>
+                <div><div className="num">8,250+</div><div className="lbl">{L.statCells[0]}</div></div>
               </div>
               <div className="stat-cell">
                 <div className="ic"><Icon.Doc size={20} style={{color:'#00B8D9'}}/></div>
-                <div><div className="num">420+</div><div className="lbl">ผลงานนวัตกรรมนำเสนอ</div></div>
+                <div><div className="num">420+</div><div className="lbl">{L.statCells[1]}</div></div>
               </div>
               <div className="stat-cell">
                 <div className="ic"><Icon.Handshake size={20} style={{color:'#F4B400'}}/></div>
-                <div><div className="num">180+</div><div className="lbl">นักลงทุน &amp; พันธมิตร</div></div>
+                <div><div className="num">180+</div><div className="lbl">{L.statCells[2]}</div></div>
               </div>
               <div className="stat-cell">
                 <div className="ic"><Icon.Calendar size={20} style={{color:'#00C26E'}}/></div>
-                <div><div className="num">95+</div><div className="lbl">กิจกรรม</div></div>
+                <div><div className="num">95+</div><div className="lbl">{L.statCells[3]}</div></div>
               </div>
               <div className="stat-cell">
                 <div className="ic"><Icon.Search size={20} style={{color:'#00B8D9'}}/></div>
-                <div><div className="num">35,000+</div><div className="lbl">การเข้าชมแพลตฟอร์ม</div></div>
+                <div><div className="num">35,000+</div><div className="lbl">{L.statCells[4]}</div></div>
               </div>
             </div>
           </div>

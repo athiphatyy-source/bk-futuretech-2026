@@ -2,7 +2,8 @@
 // User-facing additional pages: About, Matching, Events, Pitching, News, Downloads, Contact, Account
 
 // ============ About ============
-function AboutPage({ setScreen }) {
+function AboutPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   return (
     <div data-screen-label="10 About">
       <div className="about-hero">
@@ -10,10 +11,8 @@ function AboutPage({ setScreen }) {
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:14}}>
             ABOUT THE FESTIVAL
           </div>
-          <h1>เกี่ยวกับ <span className="gr">Bang Khen Agri-Food &amp; Env Tech Festival 2026</span></h1>
-          <p>มหกรรมนวัตกรรมระดับชาติด้านเกษตร อาหาร และสิ่งแวดล้อม จัดโดยมหาวิทยาลัยเกษตรศาสตร์
-          ร่วมกับย่านนวัตกรรมบางเขน (Bang Khen Innovation District) และเครือข่ายพันธมิตร
-          ระหว่างวันที่ 24–25 มิถุนายน 2569</p>
+          <h1>{isEn ? <>About the <span className="gr">Bang Khen Agri-Food &amp; Env Tech Festival 2026</span></> : <>เกี่ยวกับ <span className="gr">Bang Khen Agri-Food &amp; Env Tech Festival 2026</span></>}</h1>
+          <p>{isEn ? 'A national innovation festival on agriculture, food, and environment organized by Kasetsart University together with the Bang Khen Innovation District and its partner network, on 24–25 June 2026.' : 'มหกรรมนวัตกรรมระดับชาติด้านเกษตร อาหาร และสิ่งแวดล้อม จัดโดยมหาวิทยาลัยเกษตรศาสตร์ ร่วมกับย่านนวัตกรรมบางเขน (Bang Khen Innovation District) และเครือข่ายพันธมิตร ระหว่างวันที่ 24–25 มิถุนายน 2569'}</p>
         </div>
       </div>
 
@@ -59,7 +58,7 @@ function AboutPage({ setScreen }) {
       <section className="about-section" style={{background:'#fff', paddingTop: 48, paddingBottom: 48}}>
         <div className="container">
           <div className="section-eyebrow">ROADMAP</div>
-          <h2 className="section-title">เส้นทางสู่งาน</h2>
+          <h2 className="section-title">{isEn ? 'Road to the Event' : 'เส้นทางสู่งาน'}</h2>
           <div className="timeline">
             {[
               { w: 'JAN 2026', t: 'เปิดรับสมัคร', d: 'เปิดรับผลงานนวัตกรรมเข้าสู่ระบบ' },
@@ -81,7 +80,7 @@ function AboutPage({ setScreen }) {
       <section className="about-section">
         <div className="container">
           <div className="section-eyebrow">ORGANIZING COMMITTEE</div>
-          <h2 className="section-title">คณะกรรมการจัดงาน</h2>
+          <h2 className="section-title">{isEn ? 'Organizing Committee' : 'คณะกรรมการจัดงาน'}</h2>
           <div className="committee-grid">
             {[
               { n: 'รศ.ดร. สมพร อนันต์', r: 'ประธานคณะกรรมการ', o: 'มหาวิทยาลัยเกษตรศาสตร์', i:'สอ' },
@@ -103,7 +102,7 @@ function AboutPage({ setScreen }) {
       <section className="about-section" style={{background:'#fff'}}>
         <div className="container">
           <div className="section-eyebrow">PARTNERS &amp; SPONSORS</div>
-          <h2 className="section-title">พันธมิตรและผู้สนับสนุน</h2>
+          <h2 className="section-title">{isEn ? 'Partners & Sponsors' : 'พันธมิตรและผู้สนับสนุน'}</h2>
           <div className="partner-grid">
             {['KU', 'BID', 'บพข.', 'สวก.', 'RUN', 'กทม.', 'NSTDA', 'มจธ.', 'มจ.', 'มอ.', 'มข.', 'RMUT'].map((p,i) => (
               <div key={i} className="partner-logo">{p}</div>
@@ -118,7 +117,8 @@ function AboutPage({ setScreen }) {
 }
 
 // ============ Business Matching ============
-function MatchingPage({ setScreen }) {
+function MatchingPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [view, setView] = useState('list'); // list | book
   const [day, setDay] = useState(0);
   const [slot, setSlot] = useState(null);
@@ -141,9 +141,9 @@ function MatchingPage({ setScreen }) {
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:8}}>
             BUSINESS MATCHING
           </div>
-          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>จับคู่ธุรกิจ</h1>
+          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>{isEn ? 'Business Matching' : 'จับคู่ธุรกิจ'}</h1>
           <p style={{color:'#B7C8D7', maxWidth:640, fontSize:15, margin:0}}>
-            ค้นหาคู่ทางธุรกิจที่เหมาะสม จองคิวนัดหมายล่วงหน้า ระหว่าง 24–25 มิถุนายน 2569 ณ Business Matching Hall
+            {isEn ? 'Find your ideal business partner and book appointments in advance — 24–25 June 2026 at the Business Matching Hall.' : 'ค้นหาคู่ทางธุรกิจที่เหมาะสม จองคิวนัดหมายล่วงหน้า ระหว่าง 24–25 มิถุนายน 2569 ณ Business Matching Hall'}
           </p>
         </div>
       </div>
@@ -263,7 +263,8 @@ function MatchingPage({ setScreen }) {
 }
 
 // ============ Events Schedule + Registration ============
-function EventsPage({ setScreen }) {
+function EventsPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [day, setDay] = useState(0);
   const [showTicket, setShowTicket] = useState(false);
 
@@ -286,7 +287,7 @@ function EventsPage({ setScreen }) {
       <div className="event-hero">
         <div className="container">
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:8}}>EVENT SCHEDULE</div>
-          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>ตารางกิจกรรมและลงทะเบียน</h1>
+          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>{isEn ? 'Event Schedule & Registration' : 'ตารางกิจกรรมและลงทะเบียน'}</h1>
           <p style={{color:'#B7C8D7', maxWidth:640, fontSize:15, margin:0}}>
             24–25 มิถุนายน 2569 · อาคารจักรพันธ์เพ็ญศิริ ม.เกษตรศาสตร์ บางเขน
           </p>
@@ -404,7 +405,8 @@ function EventsPage({ setScreen }) {
 }
 
 // ============ Pitching Application ============
-function PitchingPage({ setScreen }) {
+function PitchingPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [track, setTrack] = useState(0);
 
   return (
@@ -412,7 +414,7 @@ function PitchingPage({ setScreen }) {
       <div style={{background:'var(--gradient-hero)', color:'#fff', padding:'56px 0'}}>
         <div className="container">
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:8}}>PITCHING APPLICATION</div>
-          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>สมัครเข้าร่วมเวที Pitching</h1>
+          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>{isEn ? 'Apply for Pitching Stage' : 'สมัครเข้าร่วมเวที Pitching'}</h1>
           <p style={{color:'#B7C8D7', maxWidth:640, fontSize:15, margin:0}}>
             นำเสนอนวัตกรรมต่อหน้านักลงทุนและพันธมิตรกว่า 150 องค์กร · เปิดรับสมัครถึง 31 พฤษภาคม 2569
           </p>
@@ -501,7 +503,8 @@ function PitchingPage({ setScreen }) {
 }
 
 // ============ News & Media ============
-function NewsPage({ setScreen }) {
+function NewsPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [tab, setTab] = useState('all');
 
   const featured = { cat: 'ANNOUNCEMENT', t: 'เปิดรับผลงานนวัตกรรม BK FutureTech 2026 แล้ววันนี้!', d: 'ส่งผลงานนวัตกรรมเข้าร่วมประกวด ชิงรางวัลและโอกาสต่อยอดเชิงพาณิชย์ภายในงาน 24–25 มิ.ย. 2569 ที่อาคารจักรพันธ์เพ็ญศิริ', date: '15 มิ.ย. 2026', kind: 'tech' };
@@ -523,9 +526,9 @@ function NewsPage({ setScreen }) {
       <div style={{background:'var(--gradient-hero)', color:'#fff', padding:'56px 0'}}>
         <div className="container">
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:8}}>NEWS &amp; MEDIA</div>
-          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>ข่าวสารและประกาศ</h1>
+          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>{isEn ? 'News & Announcements' : 'ข่าวสารและประกาศ'}</h1>
           <p style={{color:'#B7C8D7', maxWidth:640, fontSize:15, margin:0}}>
-            ติดตามข่าวสาร ความเคลื่อนไหว และอัปเดตล่าสุดของ BK FutureTech 2026
+            {isEn ? 'Follow the latest news, updates, and announcements for BK FutureTech 2026.' : 'ติดตามข่าวสาร ความเคลื่อนไหว และอัปเดตล่าสุดของ BK FutureTech 2026'}
           </p>
         </div>
       </div>
@@ -587,7 +590,8 @@ function NewsPage({ setScreen }) {
 }
 
 // ============ Downloads ============
-function DownloadsPage({ setScreen }) {
+function DownloadsPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const files = [
     { c: 'BRIEF', l: 'BK FutureTech 2026 Event Brief', m: 'PDF · 4.2 MB', t: 'pdf', cat: 'general' },
     { c: 'BRIEF', l: 'TOR — Interactive Online Platform', m: 'PDF · 2.8 MB', t: 'pdf', cat: 'general' },
@@ -608,8 +612,8 @@ function DownloadsPage({ setScreen }) {
       <div style={{background:'var(--gradient-hero)', color:'#fff', padding:'56px 0'}}>
         <div className="container">
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:8}}>DOWNLOAD CENTER</div>
-          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>ดาวน์โหลดเอกสาร</h1>
-          <p style={{color:'#B7C8D7', maxWidth:640, fontSize:15, margin:0}}>สูจิบัตร, Catalogue, Press Kit, แบบฟอร์ม และเอกสารทั้งหมดของงาน</p>
+          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>{isEn ? 'Download Documents' : 'ดาวน์โหลดเอกสาร'}</h1>
+          <p style={{color:'#B7C8D7', maxWidth:640, fontSize:15, margin:0}}>{isEn ? 'Programme booklet, Catalogue, Press Kit, forms, and all event documents.' : 'สูจิบัตร, Catalogue, Press Kit, แบบฟอร์ม และเอกสารทั้งหมดของงาน'}</p>
         </div>
       </div>
 
@@ -642,13 +646,14 @@ function DownloadsPage({ setScreen }) {
 }
 
 // ============ Contact ============
-function ContactPage({ setScreen }) {
+function ContactPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   return (
     <div data-screen-label="16 Contact">
       <div style={{background:'var(--gradient-hero)', color:'#fff', padding:'56px 0'}}>
         <div className="container">
           <div style={{fontFamily:'var(--font-en)', fontSize:12, letterSpacing:3, fontWeight:600, color:'#00C26E', marginBottom:8}}>CONTACT US</div>
-          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>ติดต่อเรา</h1>
+          <h1 style={{margin:'0 0 8px', fontSize:32, fontWeight: 600, color:'#fff'}}>{isEn ? 'Contact Us' : 'ติดต่อเรา'}</h1>
           <p style={{color:'#B7C8D7', maxWidth:640, fontSize:15, margin:0}}>
             สอบถามข้อมูล แจ้งปัญหาการใช้งาน หรือเสนอแนะกิจกรรมที่สนใจ
           </p>
@@ -728,10 +733,18 @@ function ContactPage({ setScreen }) {
 }
 
 // ============ My Account ============
-function AccountPage({ setScreen }) {
+function AccountPage({ setScreen, lang = 'th' }) {
+  const isEn = lang === 'en';
   const [tab, setTab] = useState('overview');
 
-  const items = {
+  const items = isEn ? {
+    overview: 'Overview',
+    subs: 'My Submissions',
+    regs: 'Registrations',
+    matching: 'Matching Bookings',
+    notif: 'Notifications',
+    profile: 'Profile',
+  } : {
     overview: 'ภาพรวม',
     subs: 'ผลงานของฉัน',
     regs: 'การลงทะเบียน',
@@ -774,7 +787,7 @@ function AccountPage({ setScreen }) {
           </aside>
 
           <div>
-            <h1 style={{margin:'0 0 8px', fontSize: 26, fontWeight: 600}}>สวัสดี, คุณธนพล 👋</h1>
+            <h1 style={{margin:'0 0 8px', fontSize: 26, fontWeight: 600}}>{isEn ? 'Hello, Tanapol 👋' : 'สวัสดี, คุณธนพล 👋'}</h1>
             <p style={{margin: '0 0 24px', color:'var(--ink-3)', fontSize: 14}}>
               ภาพรวมกิจกรรมและผลงานของคุณบนแพลตฟอร์ม BK FutureTech 2026
             </p>

@@ -98,21 +98,21 @@ function App() {
     <div className="app">
       {showTopNav && <TopNav screen={screen} setScreen={setScreen} isAuthed={isAuthed} signOut={signOut} lang={lang} setLang={setLang} />}
 
-      {screen === 'home' && <HomePage setScreen={setScreen} />}
-      {screen === 'about' && <AboutPage setScreen={setScreen} />}
-      {screen === 'login' && <LoginPage setScreen={setScreen} onLogin={onLogin} />}
-      {screen === 'register' && <RegisterPage setScreen={setScreen} onLogin={onLogin} />}
-      {screen === 'catalogue' && <CataloguePage setScreen={setScreen} />}
-      {screen === 'detail' && <DetailPage setScreen={setScreen} />}
-      {screen === 'submit' && <SubmitPage setScreen={setScreen} />}
-      {screen === 'knowledge' && <KnowledgePage setScreen={setScreen} />}
-      {screen === 'matching' && <MatchingPage setScreen={setScreen} />}
-      {screen === 'events' && <EventsPage setScreen={setScreen} />}
-      {screen === 'pitching' && <PitchingPage setScreen={setScreen} />}
-      {screen === 'news' && <NewsPage setScreen={setScreen} />}
-      {screen === 'downloads' && <DownloadsPage setScreen={setScreen} />}
-      {screen === 'contact' && <ContactPage setScreen={setScreen} />}
-      {screen === 'account' && <AccountPage setScreen={setScreen} />}
+      {screen === 'home' && <HomePage setScreen={setScreen} lang={lang} />}
+      {screen === 'about' && <AboutPage setScreen={setScreen} lang={lang} />}
+      {screen === 'login' && <LoginPage setScreen={setScreen} onLogin={onLogin} lang={lang} />}
+      {screen === 'register' && <RegisterPage setScreen={setScreen} onLogin={onLogin} lang={lang} />}
+      {screen === 'catalogue' && <CataloguePage setScreen={setScreen} lang={lang} />}
+      {screen === 'detail' && <DetailPage setScreen={setScreen} lang={lang} />}
+      {screen === 'submit' && <SubmitPage setScreen={setScreen} lang={lang} />}
+      {screen === 'knowledge' && <KnowledgePage setScreen={setScreen} lang={lang} />}
+      {screen === 'matching' && <MatchingPage setScreen={setScreen} lang={lang} />}
+      {screen === 'events' && <EventsPage setScreen={setScreen} lang={lang} />}
+      {screen === 'pitching' && <PitchingPage setScreen={setScreen} lang={lang} />}
+      {screen === 'news' && <NewsPage setScreen={setScreen} lang={lang} />}
+      {screen === 'downloads' && <DownloadsPage setScreen={setScreen} lang={lang} />}
+      {screen === 'contact' && <ContactPage setScreen={setScreen} lang={lang} />}
+      {screen === 'account' && <AccountPage setScreen={setScreen} lang={lang} />}
       {screen === 'admin' && renderAdmin()}
 
       <ScreenJumper screen={screen} setScreen={setScreen} adminScreen={adminScreen} setAdminScreen={setAdminScreen} />
