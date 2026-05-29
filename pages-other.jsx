@@ -657,6 +657,14 @@ function KnowledgePage({ setScreen, lang = 'th' }) {
   const [tab, setTab] = useState('trl'); // trl | srl | quiz
   const [q, setQ] = useState(0);
   const [answers, setAnswers] = useState({});
+  const [showResult, setShowResult] = useState(false);
+
+  const calcTRL = () => {
+    const base = (answers[0] || 0) * 2 + 1;
+    const adj = Math.round(((answers[1] || 0) + (answers[2] || 0) - 4) / 4);
+    return Math.min(9, Math.max(1, base + adj));
+  };
+  const trlResult = showResult ? calcTRL() : null;
 
   const trlLevels = [
     { lvl: 1, ttl: 'หลักการพื้นฐาน', desc: 'การสังเกตและรายงานหลักการพื้นฐาน' },
@@ -770,7 +778,63 @@ function KnowledgePage({ setScreen, lang = 'th' }) {
           </>
         )}
 
-        {tab === 'quiz' && (
+        {tab === 'quiz' && showResult && (
+          <div className="trl-result-wrap">
+            {/* Print header (hidden on screen) */}
+            <div className="print-only trl-print-header">
+              <div style={{fontFamily:'var(--font-en)', fontWeight:700, fontSize:20, color:'#0F2233'}}>BK FutureTech 2026</div>
+              <div style={{fontSize:12, color:'#6A8098', letterSpacing:2}}>TRL / SRL SELF-ASSESSMENT RESULT</div>
+            </div>
+
+            <div className="trl-result-card">
+              <div className="trl-result-badge">
+                <div className="trl-num">{trlResult}</div>
+                <div className="trl-label">TRL</div>
+              </div>
+              <div className="trl-result-body">
+                <div className="trl-result-title">
+                  {isEn ? 'Your Technology Readiness Level' : 'ระดับความพร้อมของเทคโนโลยีของคุณ'}
+                </div>
+                <div className="trl-result-name">
+                  {trlLevels[trlResult - 1]?.ttl}
+                </div>
+                <div className="trl-result-desc">
+                  {trlLevels[trlResult - 1]?.desc}
+                </div>
+                <div className="trl-result-rec">
+                  {trlResult <= 3 && (isEn ? 'Still in concept stage — focus on building a prototype and laboratory testing.' : 'ยังอยู่ในขั้นแนวคิด — ควรพัฒนาต้นแบบและทดสอบในห้องปฏิบัติการ')}
+                  {trlResult >= 4 && trlResult <= 6 && (isEn ? 'In development — test with real users and consider filing a patent.' : 'กำลังพัฒนา — ควรทดสอบกับผู้ใช้จริงและเตรียมจดสิทธิบัตร')}
+                  {trlResult >= 7 && trlResult <= 8 && (isEn ? 'Nearly ready — pilot in real markets and seek commercial partners.' : 'เกือบพร้อม — ควรทดสอบในตลาดและหาพันธมิตรเชิงพาณิชย์')}
+                  {trlResult === 9 && (isEn ? 'Market ready — suitable for commercialization and investment opportunities.' : 'พร้อมใช้งาน — เหมาะสมสำหรับการต่อยอดเชิงพาณิชย์และการลงทุน')}
+                </div>
+              </div>
+            </div>
+
+            <div className="trl-result-answers">
+              <h4>{isEn ? 'Your Answers' : 'สรุปคำตอบของคุณ'}</h4>
+              {quizQs.map((qs, i) => (
+                <div key={i} className="trl-answer-row">
+                  <div className="trl-answer-q">{qs.q}</div>
+                  <div className="trl-answer-a">{qs.opts[answers[i]]}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="no-print" style={{display:'flex', gap:12, marginTop:24}}>
+              <button className="btn btn-primary" onClick={() => window.print()}>
+                <Icon.Download size={15}/> {isEn ? 'Print / Save PDF' : 'พิมพ์ / บันทึก PDF'}
+              </button>
+              <button className="btn btn-outline" onClick={() => { setShowResult(false); setQ(0); setAnswers({}); }}>
+                {isEn ? 'Try Again' : 'ทำแบบประเมินใหม่'}
+              </button>
+              <button className="btn btn-outline" onClick={() => setShowResult(false)}>
+                {isEn ? 'Back to Quiz' : 'กลับไปแก้คำตอบ'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {tab === 'quiz' && !showResult && (
           <div className="quiz-shell">
             <div className="quiz-card">
               <div className="quiz-progress"><div className="fill" style={{width: `${((q+1)/quizQs.length)*100}%`}}/></div>
@@ -796,8 +860,9 @@ function KnowledgePage({ setScreen, lang = 'th' }) {
                     คำถามถัดไป <Icon.ChevronRight />
                   </button>
                 ) : (
-                  <button className="btn btn-primary">
-                    ดูผลการประเมิน <Icon.ArrowRight />
+                  <button className="btn btn-primary" disabled={answers[q] === undefined}
+                    onClick={() => setShowResult(true)}>
+                    {isEn ? 'View Result' : 'ดูผลการประเมิน'} <Icon.ArrowRight />
                   </button>
                 )}
               </div>
